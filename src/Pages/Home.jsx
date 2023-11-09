@@ -8,7 +8,7 @@ import "./Home.css";
 export default function homepage (){
     return(
         <>
-            <div className='container_home'>
+            <div className='main_container'>
                 <Navbar/>
                 <Row>
                     <Col xs={{ order: 'first' }}><Forms /></Col>

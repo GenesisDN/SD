@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
@@ -57,7 +58,10 @@ const Forms = () => {
                       <Col sm="10"><Form.Control type="text" placeholder="Ex: Funchal.." value={formData.place} onChange={handleInputChange}/></Col>
                     </Form.Group>
                   </Form>
+                  <Link to="/search">
                     <Button variant="primary"className='search_button'>Search</Button>
+                  </Link>
+                    
                 </Card.Body>
         </Card>
     </div>
