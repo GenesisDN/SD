@@ -7,7 +7,6 @@ import localImage from '../Assets/location.png';
 import dataImage from '../Assets/data.png';
 
 const Events = () => {
-    const limitedEvents = events.slice(0, 3);
     const [events, setEvents] = useState([]);
     useEffect(() => {
         fetch('http://127.0.0.1:8000/api/events', {
@@ -23,7 +22,7 @@ const Events = () => {
     
   return (
     <div className='container'>
-        {limitedEvents.map(event => (
+        {events.map(event => (
             <Card key={event.id} className='card_container'>
                 <Card.Header className='title_event'>{event.name}</Card.Header>
                 <Card.Body>
@@ -36,7 +35,7 @@ const Events = () => {
                         {event.date}
                     </Card.Text>
                     <Link to="/search">
-                        <Button variant="primary">Register</Button>
+                        <Button className='search_button' variant="primary">Register</Button>
                     </Link>
                 </Card.Body>
             </Card>

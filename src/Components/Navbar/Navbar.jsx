@@ -7,7 +7,7 @@ const Navbar = () => {
     <div className="user">
       <Nav variant="pills" className="justify-content-end" activeKey="/home">
         <Nav.Item>
-          <Nav.Link href="/home" className="custom-button">Log In</Nav.Link>
+          <Nav.Link href="/login" className="custom-button">Log In</Nav.Link>
         </Nav.Item>
       </Nav>
     </div>

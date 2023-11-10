@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -30,7 +30,6 @@ const Forms = () => {
     })
       .then(response => response.json())
       .then(data => {
-        // Maneja la respuesta del backend (data) como sea necesario
         console.log(data);
       })
       .catch(error => console.error('Error:', error));
