@@ -7,7 +7,6 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import "./Forms.css"
 
-
 const Forms = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -22,7 +21,7 @@ const Forms = () => {
     });
   };
   const handleSearch = () => {
-    fetch('URL_DEL_BACKEND', {
+    fetch('http://127.0.0.1:8000/api/events', {
       method: 'POST', 
       headers: {
         'Content-Type': 'application/json',

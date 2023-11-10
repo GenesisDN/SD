@@ -47,7 +47,6 @@ const Register = () => {
                   <Link to="/search">
                     <Button variant="primary"className='register_button'>Register</Button>
                   </Link>
-                    
                 </Card.Body>
         </Card>
     </div>
