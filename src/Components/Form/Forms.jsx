@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
@@ -8,6 +8,8 @@ import Row from 'react-bootstrap/Row';
 import "./Forms.css"
 
 const Forms = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: '',
     date: '',
@@ -20,19 +22,10 @@ const Forms = () => {
       [name]: value
     });
   };
-  const handleSearch = () => {
-    fetch('http://127.0.0.1:8000/api/events', {
-      method: 'POST', 
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => console.error('Error:', error));
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    navigate('/search', { state: { event: formData } });
   };
 
   return (
@@ -40,25 +33,25 @@ const Forms = () => {
         <Card className="text-center">
             <Card.Header className='title_search'>Search Event</Card.Header>
                 <Card.Body>
-                  <Form>
+                  <Form onSubmit={handleSubmit}>
                     <Form.Group as={Row} className="mb-3" controlId="formEventName">
                       <Form.Label column sm="2">Name</Form.Label>
-                      <Col sm="10"><Form.Control type="text" placeholder="Name" value={formData.name} onChange={handleInputChange}/></Col>
+                      <Col sm="10"><Form.Control name="name" type="text" placeholder="Name" value={formData.name} onChange={handleInputChange}/></Col>
                     </Form.Group>
 
                     <Form.Group as={Row} className="mb-3" controlId="formEventData">
                       <Form.Label column sm="2">Data</Form.Label>
-                      <Col sm="10"><Form.Control type="date" placeholder="10/20/30" value={formData.date} onChange={handleInputChange}/></Col>
+                      <Col sm="10"><Form.Control name="date" type="date" placeholder="10/20/30" value={formData.date} onChange={handleInputChange}/></Col>
                     </Form.Group>
 
                     <Form.Group as={Row} className="mb-3" controlId="forEventLocation">
-                      <Form.Label column sm="2">Location</Form.Label>
-                      <Col sm="10"><Form.Control type="text" placeholder="Ex: Funchal.." value={formData.place} onChange={handleInputChange}/></Col>
+                      <Form.Label column sm="2">Place</Form.Label>
+                      <Col sm="10"><Form.Control name="place" type="text" placeholder="Ex: Funchal.." value={formData.place} onChange={handleInputChange}/></Col>
                     </Form.Group>
+                    <Button type="submit" variant="primary" className='search_button'>
+                      Search
+                    </Button>
                   </Form>
-                  <Link to="/search">
-                    <Button variant="primary"className='search_button'>Search</Button>
-                  </Link>
                     
                 </Card.Body>
         </Card>

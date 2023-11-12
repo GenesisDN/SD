@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
@@ -8,45 +10,52 @@ import Row from 'react-bootstrap/Row';
 import './Register.css'
 
 const Register = () => {
+
+    const location = useLocation();
+    const navigate = useNavigate();
+    const eventId = location.state ? location.state.event : null;
+
     const [registerData, setRegisterData] = useState({
         email: '',
+        event_id: 0,
     })
+
     const handleInputChange = (e) => {
         const  {name, value} = e.target;
         setRegisterData({
-            ...registerData
-            [name] = value
+            ...registerData,
+            [name]: value
         });
     }
     const handleRegister = () => {
-        fetch('URL_DEL_BACKEND', {
+        registerData.event_id = eventId;
+        console.log(JSON.stringify(registerData));
+
+        fetch('http://127.0.0.1:8000/api/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(registerData),
-        })
-        .then(response => response.json())
-        .then(data =>{
-            console.log(data);
-        })
-        .catch(err => console.error(err));
+        });
+
+        navigate('/');
     }
 
   return (
     <div className='container_register'>
       <Card className="text-center">
-            <Card.Header className='title_register'>Register in a event</Card.Header>
+            <Card.Header className='title_register'>Register in {eventId}</Card.Header>
                 <Card.Body>
-                  <Form>
+                  <Form onSubmit={handleRegister}>
                     <Form.Group as={Row} className="mb-3" controlId="forEventLocation">
                       <Form.Label column sm="2">Email</Form.Label>
-                      <Col sm="10"><Form.Control type="email" placeholder="email@gmail.com" value={registerData.email} onChange={handleInputChange}/></Col>
+                      <Col sm="10"><Form.Control name="email" type="email" placeholder="email@gmail.com" value={registerData.email} onChange={handleInputChange}/></Col>
                     </Form.Group>
+                      <Button type="submit" variant="primary" className='register_button'>
+                          Register
+                      </Button>
                   </Form>
-                  <Link to="/search">
-                    <Button variant="primary"className='register_button'>Register</Button>
-                  </Link>
                 </Card.Body>
         </Card>
     </div>

@@ -46,7 +46,7 @@ const User = () => {
                   <Form>
                     <Form.Group as={Row} className="mb-3" controlId="userEventID">
                       <Form.Label column sm="2">ID</Form.Label>
-                      <Col sm="10"><Form.Control type="text" placeholder="123456" value={userData.id} onChange={handleInputChange}/></Col>
+                      <Col sm="10"><Form.Control name="id" type="text" placeholder="123456" value={userData.id} onChange={handleInputChange}/></Col>
                     </Form.Group>
                   </Form>
                 <Button variant="primary"className='search_button' onClick={handleShow}>Search</Button>
